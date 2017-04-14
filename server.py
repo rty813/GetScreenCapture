@@ -4,14 +4,10 @@ import pyscreenshot as ImageGrab
 from socket import *
 import os,struct
 
-
-# im = ImageGrab.grab()
-# im.save('c:\\Users\\zhang\\Desktop\\1', 'jpeg')
-
 if __name__ == '__main__':
     port = 12345
     BUFSIZE=1024
-    s = socket(AF_INET6, SOCK_STREAM)
+    s = socket(AF_INET, SOCK_STREAM)
     s.bind(('', port))
 
     s.listen(5)
@@ -30,9 +26,8 @@ if __name__ == '__main__':
                 break
             print(data.decode('utf8'))
             if 'capture' in data.decode('utf8'):
-                im = ImageGrab.grab()
                 filename = 'capture.jpeg'
-                im.save(filename, 'jpeg')
+                ImageGrab.grab_to_file(filename)
 
                 BUFSIZE = 1024
                 FILEINFO_SIZE = struct.calcsize('128s32sI8s')
@@ -46,13 +41,6 @@ if __name__ == '__main__':
                     tcpClientSock.send(filedata)
                 print "Send Successful!"
                 fp.close()
-
-
-
-                # lena = mpimg.imread(filename)
-                # plt.imshow(lena)
-                # plt.axis('off')
-                # plt.show()
 
     tcpClientSock.close()
     s.close()

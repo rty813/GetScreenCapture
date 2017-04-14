@@ -4,12 +4,12 @@ import struct, os
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-HOST = 'desktop.rty813.xyz'
+HOST = '10.25.79.49'
 PORT = 12345
 BUFSIZE = 1024
 ADDR = (HOST, PORT)
 
-client = socket(AF_INET6, SOCK_STREAM)
+client = socket(AF_INET, SOCK_STREAM)
 client.connect(ADDR)
 
 data = "capture"
